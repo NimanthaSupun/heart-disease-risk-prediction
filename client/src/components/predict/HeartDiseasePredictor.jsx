@@ -130,7 +130,7 @@ const HeartDiseasePredictor = () => {
             <div className="space-y-4">
               {/* Gender */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Gender</label>
+                <label className=" text-sm font-medium text-gray-700 mb-2">Gender</label>
                 <select
                   name="gender"
                   value={formData.gender}
@@ -145,7 +145,7 @@ const HeartDiseasePredictor = () => {
 
               {/* Age */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Age (years)</label>
+                <label className=" text-sm font-medium text-gray-700 mb-2">Age (years)</label>
                 <input
                   type="number"
                   name="age"
@@ -161,7 +161,7 @@ const HeartDiseasePredictor = () => {
               {/* Cholesterol Values */}
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center">
+                  <label className=" text-sm font-medium text-gray-700 mb-2 flex items-center">
                     <TestTube className="h-4 w-4 mr-1 text-purple-500" />
                     Total Cholesterol (TC)
                   </label>
@@ -177,7 +177,7 @@ const HeartDiseasePredictor = () => {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center">
+                  <label className=" text-sm font-medium text-gray-700 mb-2 flex items-center">
                     <TestTube className="h-4 w-4 mr-1 text-green-500" />
                     HDL Cholesterol
                   </label>
@@ -196,7 +196,7 @@ const HeartDiseasePredictor = () => {
 
               {/* Blood Pressure */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center">
+                <label className=" text-sm font-medium text-gray-700 mb-2 flex items-center">
                   <Activity className="h-4 w-4 mr-1 text-red-500" />
                   Blood Pressure (mmHg)
                 </label>
@@ -214,7 +214,7 @@ const HeartDiseasePredictor = () => {
 
               {/* Smoking Status */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center">
+                <label className=" text-sm font-medium text-gray-700 mb-2 flex items-center">
                   <Cigarette className="h-4 w-4 mr-1 text-gray-500" />
                   Smoking Status
                 </label>
@@ -232,7 +232,7 @@ const HeartDiseasePredictor = () => {
 
               {/* Diabetes */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center">
+                <label className=" text-sm font-medium text-gray-700 mb-2 flex items-center">
                   <Pill className="h-4 w-4 mr-1 text-green-500" />
                   Diabetes Status
                 </label>
