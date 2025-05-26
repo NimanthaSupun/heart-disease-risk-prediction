@@ -49,30 +49,28 @@ def predict_heart_risk():
         data = request.get_json()
         
         # Validate required fields
-        required_fields = ['sex', 'age', 'systolic_bp', 'diastolic_bp', 
-                          'cholesterol', 'smoke', 'diabetes']
+        required_fields = ['gender', 'age', 'tc', 'hdl', 'smoke', 'bpm', 'diabetes']
         
         for field in required_fields:
             if field not in data:
                 return jsonify({"error": f"Missing required field: {field}"}), 400
         
-        # Extract features in the correct order based on your dataset
-        # SEX, AGE, SYSBP, DIABP, TOTCHOL, SMOKE, DIABETES
+        # Extract features in the correct order: [gender, age, tc, hdl, smoke, bpm, diab]
         features = [
-            int(data['sex']),           # 0 for female, 1 for male
+            int(data['gender']),        # 0 for female, 1 for male
             int(data['age']),           # Age in years
-            int(data['systolic_bp']),   # Systolic blood pressure
-            int(data['diastolic_bp']),  # Diastolic blood pressure
-            int(data['cholesterol']),   # Total cholesterol
+            int(data['tc']),            # Total cholesterol
+            int(data['hdl']),           # HDL cholesterol
             int(data['smoke']),         # 0 for non-smoker, 1 for smoker
+            int(data['bpm']),           # Blood pressure (systolic)
             int(data['diabetes'])       # 0 for no diabetes, 1 for diabetes
         ]
         
         # Convert to numpy array and reshape for prediction
-        input_array = np.array([features])
+        test_data = np.array(features).reshape(1, -1)
         
         # Make prediction
-        prediction = model.predict(input_array)
+        prediction = model.predict(test_data)
         
         # Convert to risk percentage (assuming output is between 0 and 1)
         risk_percent = float(np.clip(prediction[0][0], 0, 1) * 100)
@@ -91,11 +89,11 @@ def predict_heart_risk():
             "risk_percentage": round(risk_percent, 2),
             "risk_category": risk_category,
             "input_features": {
-                "sex": "Male" if data['sex'] == 1 else "Female",
+                "gender": "Male" if data['gender'] == 1 else "Female",
                 "age": data['age'],
-                "systolic_bp": data['systolic_bp'],
-                "diastolic_bp": data['diastolic_bp'],
-                "cholesterol": data['cholesterol'],
+                "total_cholesterol": data['tc'],
+                "hdl_cholesterol": data['hdl'],
+                "blood_pressure": data['bpm'],
                 "smoke": "Yes" if data['smoke'] == 1 else "No",
                 "diabetes": "Yes" if data['diabetes'] == 1 else "No"
             }

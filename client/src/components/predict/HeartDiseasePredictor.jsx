@@ -3,12 +3,12 @@ import { Heart, User, Activity, Droplets, TestTube, Cigarette, Pill, AlertCircle
 
 const HeartDiseasePredictor = () => {
   const [formData, setFormData] = useState({
-    sex: '',
+    gender: '',
     age: '',
-    systolic_bp: '',
-    diastolic_bp: '',
-    cholesterol: '',
+    tc: '',
+    hdl: '',
     smoke: '',
+    bpm: '',
     diabetes: ''
   });
   
@@ -28,7 +28,7 @@ const HeartDiseasePredictor = () => {
   };
 
   const validateForm = () => {
-    const requiredFields = ['sex', 'age', 'systolic_bp', 'diastolic_bp', 'cholesterol', 'smoke', 'diabetes'];
+    const requiredFields = ['gender', 'age', 'tc', 'hdl', 'smoke', 'bpm', 'diabetes'];
     for (let field of requiredFields) {
       if (!formData[field]) {
         setError('Please fill in all fields');
@@ -42,20 +42,21 @@ const HeartDiseasePredictor = () => {
       return false;
     }
     
-    // Validate blood pressure ranges
-    if (parseInt(formData.systolic_bp) < 80 || parseInt(formData.systolic_bp) > 250) {
-      setError('Systolic BP must be between 80 and 250');
+    // Validate blood pressure range
+    if (parseInt(formData.bpm) < 80 || parseInt(formData.bpm) > 250) {
+      setError('Blood pressure must be between 80 and 250');
       return false;
     }
     
-    if (parseInt(formData.diastolic_bp) < 40 || parseInt(formData.diastolic_bp) > 150) {
-      setError('Diastolic BP must be between 40 and 150');
+    // Validate total cholesterol
+    if (parseInt(formData.tc) < 100 || parseInt(formData.tc) > 500) {
+      setError('Total cholesterol must be between 100 and 500 mg/dL');
       return false;
     }
     
-    // Validate cholesterol
-    if (parseInt(formData.cholesterol) < 100 || parseInt(formData.cholesterol) > 500) {
-      setError('Cholesterol must be between 100 and 500 mg/dL');
+    // Validate HDL cholesterol
+    if (parseInt(formData.hdl) < 20 || parseInt(formData.hdl) > 100) {
+      setError('HDL cholesterol must be between 20 and 100 mg/dL');
       return false;
     }
     
@@ -127,16 +128,16 @@ const HeartDiseasePredictor = () => {
             </h2>
             
             <div className="space-y-4">
-              {/* Sex */}
+              {/* Gender */}
               <div>
-                <label className=" text-sm font-medium text-gray-700 mb-2">Sex</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Gender</label>
                 <select
-                  name="sex"
-                  value={formData.sex}
+                  name="gender"
+                  value={formData.gender}
                   onChange={handleInputChange}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
-                  <option value="">Select Sex</option>
+                  <option value="">Select Gender</option>
                   <option value="0">Female</option>
                   <option value="1">Male</option>
                 </select>
@@ -144,7 +145,7 @@ const HeartDiseasePredictor = () => {
 
               {/* Age */}
               <div>
-                <label className=" text-sm font-medium text-gray-700 mb-2">Age (years)</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Age (years)</label>
                 <input
                   type="number"
                   name="age"
@@ -157,63 +158,63 @@ const HeartDiseasePredictor = () => {
                 />
               </div>
 
-              {/* Blood Pressure */}
+              {/* Cholesterol Values */}
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className=" text-sm font-medium text-gray-700 mb-2 flex items-center">
-                    <Activity className="h-4 w-4 mr-1 text-red-500" />
-                    Systolic BP
+                  <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center">
+                    <TestTube className="h-4 w-4 mr-1 text-purple-500" />
+                    Total Cholesterol (TC)
                   </label>
                   <input
                     type="number"
-                    name="systolic_bp"
-                    value={formData.systolic_bp}
+                    name="tc"
+                    value={formData.tc}
                     onChange={handleInputChange}
-                    placeholder="120"
-                    min="80"
-                    max="250"
+                    placeholder="200"
+                    min="100"
+                    max="500"
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                 </div>
                 <div>
-                  <label className=" text-sm font-medium text-gray-700 mb-2 flex items-center">
-                    <Droplets className="h-4 w-4 mr-1 text-blue-500" />
-                    Diastolic BP
+                  <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center">
+                    <TestTube className="h-4 w-4 mr-1 text-green-500" />
+                    HDL Cholesterol
                   </label>
                   <input
                     type="number"
-                    name="diastolic_bp"
-                    value={formData.diastolic_bp}
+                    name="hdl"
+                    value={formData.hdl}
                     onChange={handleInputChange}
-                    placeholder="80"
-                    min="40"
-                    max="150"
+                    placeholder="50"
+                    min="20"
+                    max="100"
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                 </div>
               </div>
 
-              {/* Cholesterol */}
+              {/* Blood Pressure */}
               <div>
-                <label className=" text-sm font-medium text-gray-700 mb-2 flex items-center">
-                  <TestTube className="h-4 w-4 mr-1 text-purple-500" />
-                  Total Cholesterol (mg/dL)
+                <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center">
+                  <Activity className="h-4 w-4 mr-1 text-red-500" />
+                  Blood Pressure (mmHg)
                 </label>
                 <input
                   type="number"
-                  name="cholesterol"
-                  value={formData.cholesterol}
+                  name="bpm"
+                  value={formData.bpm}
                   onChange={handleInputChange}
-                  placeholder="200"
-                  min="100"
-                  max="500"
+                  placeholder="120"
+                  min="80"
+                  max="250"
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
 
               {/* Smoking Status */}
               <div>
-                <label className=" text-sm font-medium text-gray-700 mb-2 flex items-center">
+                <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center">
                   <Cigarette className="h-4 w-4 mr-1 text-gray-500" />
                   Smoking Status
                 </label>
@@ -231,7 +232,7 @@ const HeartDiseasePredictor = () => {
 
               {/* Diabetes */}
               <div>
-                <label className=" text-sm font-medium text-gray-700 mb-2 flex items-center">
+                <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center">
                   <Pill className="h-4 w-4 mr-1 text-green-500" />
                   Diabetes Status
                 </label>
@@ -302,11 +303,11 @@ const HeartDiseasePredictor = () => {
                 <div className="bg-gray-50 p-4 rounded-lg">
                   <h4 className="font-semibold text-gray-800 mb-3">Input Summary:</h4>
                   <div className="grid grid-cols-2 gap-2 text-sm">
-                    <div><strong>Sex:</strong> {prediction.input_features.sex}</div>
+                    <div><strong>Gender:</strong> {prediction.input_features.gender}</div>
                     <div><strong>Age:</strong> {prediction.input_features.age} years</div>
-                    <div><strong>Systolic BP:</strong> {prediction.input_features.systolic_bp} mmHg</div>
-                    <div><strong>Diastolic BP:</strong> {prediction.input_features.diastolic_bp} mmHg</div>
-                    <div><strong>Cholesterol:</strong> {prediction.input_features.cholesterol} mg/dL</div>
+                    <div><strong>Total Cholesterol:</strong> {prediction.input_features.total_cholesterol} mg/dL</div>
+                    <div><strong>HDL Cholesterol:</strong> {prediction.input_features.hdl_cholesterol} mg/dL</div>
+                    <div><strong>Blood Pressure:</strong> {prediction.input_features.blood_pressure} mmHg</div>
                     <div><strong>Smoking:</strong> {prediction.input_features.smoke}</div>
                     <div><strong>Diabetes:</strong> {prediction.input_features.diabetes}</div>
                   </div>
