@@ -43,10 +43,10 @@ const HeartDiseasePredictor = () => {
     }
     
     // Validate blood pressure range
-    if (parseInt(formData.bpm) < 80 || parseInt(formData.bpm) > 250) {
-      setError('Blood pressure must be between 80 and 250');
-      return false;
-    }
+    // if (parseInt(formData.bpm) < 80 || parseInt(formData.bpm) > 250) {
+    //   setError('Blood pressure must be between 80 and 250');
+    //   return false;
+    // }
     
     // Validate total cholesterol
     if (parseInt(formData.tc) < 100 || parseInt(formData.tc) > 500) {
