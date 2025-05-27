@@ -70,10 +70,8 @@ pip install flask flask-cors tensorflow numpy scikit-learn joblib pandas matplot
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 👨‍💻 Author
-
+## 👨‍💻
 **Nimantha Supun**
 - GitHub: [@NimanthaSupun](https://github.com/NimanthaSupun)
-- Project Link:(git@github.com:NimanthaSupun/heart-disease-risk-prediction.git)
 
 ---
